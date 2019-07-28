@@ -1,15 +1,13 @@
 module.exports = x => {
-  if (x < 0) {
+  // Ending zero is not palindrome except it's zero
+  if (x < 0 || (x % 10 === 0 && x > 0)) {
     return false;
   }
-  const origin = x;
   let reverted = 0;
-  while (x !== 0) {
-    reverted += x % 10;
+  // only revert half of the number
+  while (x > reverted) {
+    reverted = reverted * 10 + x % 10;
     x = parseInt(x / 10);
-    if (x !== 0) {
-      reverted = reverted * 10;
-    }
   }
-  return origin === reverted
+  return x === reverted || x === parseInt(reverted / 10)
 }
