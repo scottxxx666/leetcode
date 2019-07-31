@@ -3,10 +3,14 @@ module.exports = function (strs) {
     return '';
   }
   return strs.reduce((prev, str) => {
-    let result = '';
-    for (let i = 0; i < prev.length && prev[i] === str[i]; i++) {
-      result += prev[i];
+    for (let i = 0; i < prev.length; i++) {
+      if (prev[i] !== str[i]) {
+        return prev.slice(0, i);
+      }
+      if (i === prev.length - 1) {
+        return prev
+      }
     }
-    return result;
+    return '';
   });
 }
