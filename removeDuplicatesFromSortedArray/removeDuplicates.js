@@ -1,16 +1,12 @@
 module.exports = function (nums) {
-  let last;
-  let duplicated = 0;
-
   const length = nums.length;
+  let count = 0;
   for (let i = 0; i < length; i++) {
-    const key = i - duplicated;
-    if (key !== 0 && last === nums[key]) {
-      nums.splice(key, 1);
-      duplicated++;
+    if (count !== 0 && nums[count - 1] === nums[count]) {
+      nums.splice(count, 1);
     } else {
-      last = nums[key];
+      count++;
     }
   }
-  return nums.length;
+  return count;
 };
