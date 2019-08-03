@@ -1,25 +1,18 @@
 const ListNode = require('./listNode');
-module.exports = function (l1, l2) {
-  let result = null;
-  let pointer;
-  while (l1 !== null || l2 !== null) {
-    const l1Val = l1 === null ? Number.POSITIVE_INFINITY : l1.val;
-    const l2Val = l2 === null ? Number.POSITIVE_INFINITY : l2.val;
-    let small;
-    if (l1Val <= l2Val) {
-      small = l1.val;
-      l1 = l1.next;
-    } else {
-      small = l2.val;
-      l2 = l2.next;
-    }
-    if (result === null) {
-      result = new ListNode(small);
-      pointer = result;
-    } else {
-      pointer.next = new ListNode(small);
-      pointer = pointer.next;
-    }
+
+function mergeTwoLists(l1, l2) {
+  if (l1 === null) {
+    return l2;
   }
-  return result;
-};
+  if (l2 === null) {
+    return l1;
+  }
+  if (l1.val <= l2.val) {
+    l1.next = mergeTwoLists(l1.next, l2);
+    return l1;
+  }
+  l2.next = mergeTwoLists(l1, l2.next)
+  return l2;
+}
+
+module.exports = mergeTwoLists;
