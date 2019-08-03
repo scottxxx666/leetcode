@@ -8,7 +8,7 @@ function createNode(val) {
 
 function createList(array) {
   if (array.length === 0) {
-    return undefined;
+    return null;
   }
   let result = new ListNode(array[0]);
   let pointer = result;
