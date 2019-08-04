@@ -1,10 +1,17 @@
-function maxSubArray(nums) {
-  for (let i = 1; i < nums.length; i++) {
-    if (nums[i - 1] > 0) {
-      nums[i] += nums[i - 1];
-    }
+function maxSub(max, nums) {
+  const current = nums.shift();
+  const currentMax = Math.max(max, current);
+  if (nums.length === 0) {
+    return currentMax;
   }
-  return Math.max(...nums);
+  if (current > 0) {
+    nums[0] += current;
+  }
+  return maxSub(currentMax, nums)
+}
+
+function maxSubArray(nums) {
+  return maxSub(Number.NEGATIVE_INFINITY, nums);
 }
 
 module.exports = maxSubArray;
