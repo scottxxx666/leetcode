@@ -1,13 +1,10 @@
-module.exports = function (nums) {
-  let max = Number.NEGATIVE_INFINITY;
-  let sum = 0;
-  for (let i = 0; i < nums.length; i++) {
-    if (sum >= 0 && (nums[i] >= 0 || sum + nums[i] > 0)) {
-      sum += nums[i];
-    } else {
-      sum = nums[i];
+function maxSubArray(nums) {
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i - 1] > 0) {
+      nums[i] += nums[i - 1];
     }
-    max = sum > max ? sum : max;
   }
-  return max;
-};
+  return Math.max(...nums);
+}
+
+module.exports = maxSubArray;
