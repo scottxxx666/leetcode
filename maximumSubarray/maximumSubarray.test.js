@@ -24,6 +24,10 @@ test('Max is in medium', () => {
   expect(maxSubArray([-1, 1, -1])).toEqual(1);
 });
 
-test('Max is all(cross negative)', () => {
+test('Max is all sum(cross negative)', () => {
   expect(maxSubArray([1, -1, 1])).toEqual(1);
+});
+
+test('One element array', () => {
+  expect(maxSubArray([87])).toEqual(87);
 });
