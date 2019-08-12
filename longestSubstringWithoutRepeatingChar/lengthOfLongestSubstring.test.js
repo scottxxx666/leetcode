@@ -28,6 +28,10 @@ test('Longest start from duplicate', () => {
   expect(lengthOfLongestSubstring('aab')).toEqual(2);
 });
 
+test('Duplicate char but only a char in longest', () => {
+  expect(lengthOfLongestSubstring('abbca')).toEqual(3);
+});
+
 test('Empty string return 0', () => {
   expect(lengthOfLongestSubstring('')).toEqual(0);
 });
