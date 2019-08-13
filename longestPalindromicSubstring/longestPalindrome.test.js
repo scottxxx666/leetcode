@@ -43,3 +43,11 @@ test('Empty string is valid', () => {
 test('Empty string is valid', () => {
   expect(longestPalindrome('wabaccab')).toEqual('baccab');
 });
+
+test('Empty string is valid', () => {
+  expect(longestPalindrome('babad')).toEqual('bab');
+});
+
+test('Empty string is valid', () => {
+  expect(longestPalindrome('caba')).toEqual('aba');
+});

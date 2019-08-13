@@ -1,25 +1,32 @@
-module.exports = function (s) {
+function maxExpandPalindrome(s, start, end) {
+  while (start >= 0 && end < s.length && s[start] === s[end]) {
+    start--;
+    end++;
+  }
+  return end - start - 1;
+}
+
+const longestPalindrome = function (s) {
   if (s.length <= 1) {
     return s;
   }
-  let result = s[0];
-  for (let i = 0; i < s.length; i++) {
-    for (let j = i; j < s.length; j++) {
-      const half = Math.floor((j - i + 1) / 2);
-      if ((j - i) % 2 === 0) {
-        if (s.slice(i, i + half) === s.slice(i + half + 1, j + 1).split('').reverse().join('')) {
-          if (result.length < j - i + 1) {
-            result = s.slice(i, j + 1);
-          }
-        }
-      } else {
-        if (s.slice(i, i + half) === s.slice(i + half, j + 1).split('').reverse().join('')) {
-          if (result.length < j - i + 1) {
-            result = s.slice(i, j + 1);
-          }
-        }
-      }
+  let start = 0;
+  let end = 0;
+  for (let center = 0; center < s.length; center++) {
+    const max1 = maxExpandPalindrome(s, center, center);
+    const max2 = maxExpandPalindrome(s, center, center + 1);
+    if (max1 > (end - start + 1)) {
+      const length = Math.floor(max1 / 2);
+      start = center - length;
+      end = center + length;
+    }
+    if (max2 > (end - start + 1)) {
+      const length = max2 / 2;
+      start = center - length + 1;
+      end = center + length;
     }
   }
-  return result;
-}
+  return s.slice(start, end + 1);
+};
+
+module.exports = longestPalindrome
