@@ -15,15 +15,10 @@ const longestPalindrome = function (s) {
   for (let center = 0; center < s.length; center++) {
     const max1 = maxExpandPalindrome(s, center, center);
     const max2 = maxExpandPalindrome(s, center, center + 1);
-    if (max1 > (end - start + 1)) {
-      const length = Math.floor(max1 / 2);
-      start = center - length;
-      end = center + length;
-    }
-    if (max2 > (end - start + 1)) {
-      const length = max2 / 2;
-      start = center - length + 1;
-      end = center + length;
+    const max = Math.max(max1, max2);
+    if (max > (end - start + 1)) {
+      start = center - Math.floor((max - 1) / 2);
+      end = center + Math.ceil((max - 1) / 2);
     }
   }
   return s.slice(start, end + 1);

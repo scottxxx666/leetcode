@@ -36,18 +36,18 @@ test('Two redundant and four palindrome', () => {
   expect(longestPalindrome('abacca')).toEqual('acca');
 });
 
-test('Empty string is valid', () => {
+test('A redundant and five palindrome', () => {
   expect(longestPalindrome('abaccab')).toEqual('baccab');
 });
 
-test('Empty string is valid', () => {
+test('Two redundant and six palindrome', () => {
   expect(longestPalindrome('wabaccab')).toEqual('baccab');
 });
 
-test('Empty string is valid', () => {
+test('Three palindrome and two redundant', () => {
   expect(longestPalindrome('babad')).toEqual('bab');
 });
 
-test('Empty string is valid', () => {
+test('A redundant and three palindrome', () => {
   expect(longestPalindrome('caba')).toEqual('aba');
 });
