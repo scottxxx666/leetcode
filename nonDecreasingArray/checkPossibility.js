@@ -7,21 +7,16 @@ const checkPossibility = function (nums) {
   for (let i = 1; i < nums.length; i++) {
     if (nums[i] < last) {
       count++;
-      if (i <= 1) {
-        last = Math.min(nums[i], last);
-      } else if (nums[i] < nums[i - 2]) {
-        last = nums[i - 1];
-      } else {
+      if (i <= 1 || nums[i] >= nums[i - 2]) {
         last = nums[i];
+      } else {
+        last = nums[i - 1];
       }
     } else {
       last = nums[i];
     }
-    if (count > 1) {
-      return false;
-    }
   }
-  return true;
+  return count <= 1;
 };
 
 module.exports = checkPossibility
