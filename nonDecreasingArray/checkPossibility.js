@@ -1,22 +1,14 @@
 const checkPossibility = function (nums) {
-  if (nums.length <= 2) {
-    return true;
-  }
-  let last = nums[0];
-  let count = 0;
+  let desc = null;
   for (let i = 1; i < nums.length; i++) {
-    if (nums[i] < last) {
-      count++;
-      if (i <= 1 || nums[i] >= nums[i - 2]) {
-        last = nums[i];
-      } else {
-        last = nums[i - 1];
+    if (nums[i] < nums[i - 1]) {
+      if (desc !== null) {
+        return false;
       }
-    } else {
-      last = nums[i];
+      desc = i;
     }
   }
-  return count <= 1;
+  return desc <= 1 || nums[desc] >= nums[desc - 2] || desc >= nums.length - 1 || nums[desc + 1] >= nums[desc - 1];
 };
 
 module.exports = checkPossibility

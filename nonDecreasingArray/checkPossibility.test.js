@@ -36,6 +36,14 @@ test('Need to modify 2 (4 elements)', () => {
   expect(checkPossibility([3, 4, 2, 3])).toEqual(false);
 });
 
-test('Need to modify 2 (5 elements)', () => {
-  expect(checkPossibility([1, 2, 5, 4, 3])).toEqual(false);
+test('Need to modify 1 (5 elements)', () => {
+  expect(checkPossibility([2, 3, 3, 2, 4])).toEqual(true);
+});
+
+test('Need to modify 1 (5 elements)', () => {
+  expect(checkPossibility([1, 4, 2, 3, 3])).toEqual(true);
+});
+
+test('Need to modify 1 (5 elements)', () => {
+  expect(checkPossibility([1, 2, 4, 5, 3])).toEqual(true);
 });
