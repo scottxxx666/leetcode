@@ -3,10 +3,8 @@ const invertTree = function (root) {
     return root;
   }
   let temp = root.left;
-  root.left = root.right;
-  root.right = temp;
-  invertTree(root.left);
-  invertTree(root.right);
+  root.left = invertTree(root.right);
+  root.right = invertTree(temp);
   return root;
 };
 
