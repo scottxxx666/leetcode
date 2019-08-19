@@ -1,32 +1,29 @@
-let stack;
-let min;
-
 const MinStack = function () {
-  stack = [];
-  min = [];
+  this.stack = [];
+  this.min = [];
 };
 
-MinStack.prototype.push = (x) => {
-  if (min.length === 0 || x <= min[min.length - 1]) {
-    min.push(x);
+MinStack.prototype.push = function (x) {
+  if (this.min.length === 0 || x <= this.min[this.min.length - 1]) {
+    this.min.push(x);
   }
-  stack.push(x);
+  this.stack.push(x);
 };
 
-MinStack.prototype.pop = () => {
-  const pop = stack.pop();
-  if (pop === min[min.length - 1]) {
-    min.pop();
+MinStack.prototype.pop = function () {
+  const pop = this.stack.pop();
+  if (pop === this.min[this.min.length - 1]) {
+    this.min.pop();
   }
   return pop;
 };
 
-MinStack.prototype.top = () => {
-  return stack[stack.length - 1];
+MinStack.prototype.top = function () {
+  return this.stack[this.stack.length - 1];
 };
 
-MinStack.prototype.getMin = () => {
-  return min[min.length - 1];
+MinStack.prototype.getMin = function () {
+  return this.min[this.min.length - 1];
 };
 
 module.exports = MinStack;
