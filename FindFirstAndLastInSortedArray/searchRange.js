@@ -1,9 +1,9 @@
-function search(nums, target, direction) {
+function search(nums, target) {
   let start = 0;
   let end = nums.length - 1;
   while (start <= end) {
     const pointer = start + Math.floor((end - start) / 2);
-    if (nums[pointer] > target || (direction === 'left' && nums[pointer] === target)) {
+    if (nums[pointer] > target) {
       end = pointer - 1;
     } else {
       start = pointer + 1;
@@ -13,8 +13,8 @@ function search(nums, target, direction) {
 }
 
 const searchRange = function (nums, target) {
-  const left = search(nums, target, 'left');
-  const right = search(nums, target, 'right') - 1;
+  const left = search(nums, target - 0.5);
+  const right = search(nums, target + 0.5) - 1;
   if (right < left) {
     return [-1, -1];
   }
