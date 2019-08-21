@@ -8,6 +8,10 @@ test('Not find return [-1, -1]', () => {
   expect(searchRange([1, 2, 3, 4, 5], 0)).toEqual([-1, -1]);
 });
 
+test('Not find return [-1, -1] (between values)', () => {
+  expect(searchRange([1, 2, 4, 5, 6], 3)).toEqual([-1, -1]);
+});
+
 test('1 elements: [0, 0]', () => {
   expect(searchRange([1], 1)).toEqual([0, 0]);
 });
@@ -31,4 +35,3 @@ test('3 elements: [0, 1]', () => {
 test('3 elements: [0, 2]', () => {
   expect(searchRange([1, 1, 1], 1)).toEqual([0, 2]);
 });
-
