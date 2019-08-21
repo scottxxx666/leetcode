@@ -4,24 +4,19 @@ function search(nums, target, direction) {
   while (start <= end) {
     const pointer = start + Math.floor((end - start) / 2);
 
-    if (direction === 'left') {
-      if (nums[pointer] === target && (pointer === start || nums[pointer - 1] !== target)) {
+    if (nums[pointer] === target) {
+      if (direction === 'left' && (pointer === start || nums[pointer - 1] !== target)) {
         return pointer;
       }
-      if (nums[pointer] < target) {
-        start = pointer + 1;
-      } else {
-        end = pointer - 1;
+      if (direction === 'right' && (pointer === end || nums[pointer + 1] !== target)) {
+        return pointer;
       }
+    }
+    
+    if (nums[pointer] > target || (direction === 'left' && nums[pointer] === target)) {
+      end = pointer - 1;
     } else {
-      if (nums[pointer] === target && (pointer === end || nums[pointer + 1] !== target)) {
-        return pointer;
-      }
-      if (nums[pointer] > target) {
-        end = pointer - 1;
-      } else {
-        start = pointer + 1;
-      }
+      start = pointer + 1;
     }
   }
   return -1;
