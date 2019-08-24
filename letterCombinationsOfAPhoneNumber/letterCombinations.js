@@ -13,15 +13,11 @@ function letterCombinations(digits) {
   for (let i = 0; i < digits.length; i++) {
     const chars = lookup[digits[i]];
     if (result.length === 0) {
-      chars.forEach(c => result.push(c));
+      result = [...chars];
     } else {
-      let newResult = [];
-      result.forEach(each => {
-        chars.forEach(c => {
-          newResult.push(each + c);
-        });
-      });
-      result = newResult;
+      result = result.reduce((prev, each) => {
+        return [...prev, ...chars.map(c => each + c)];
+      }, []);
     }
   }
   return result;
