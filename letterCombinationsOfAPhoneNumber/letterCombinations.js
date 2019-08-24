@@ -9,14 +9,11 @@ function letterCombinations(digits) {
     '8': ['t', 'u', 'v'],
     '9': ['w', 'x', 'y', 'z'],
   };
-  let result = [''];
-  for (let i = 0; i < digits.length; i++) {
-    const chars = lookup[digits[i]];
-    result = result.reduce((prev, each) => {
-      return [...prev, ...chars.map(c => each + c)];
+  return digits.split('').reduce((result, current) => {
+    return result.reduce((prev, each) => {
+      return [...prev, ...lookup[current].map(c => each + c)];
     }, []);
-  }
-  return result;
+  }, ['']);
 }
 
 module.exports = letterCombinations;
