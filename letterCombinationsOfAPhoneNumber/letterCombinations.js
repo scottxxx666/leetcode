@@ -9,16 +9,12 @@ function letterCombinations(digits) {
     '8': ['t', 'u', 'v'],
     '9': ['w', 'x', 'y', 'z'],
   };
-  let result = [];
+  let result = [''];
   for (let i = 0; i < digits.length; i++) {
     const chars = lookup[digits[i]];
-    if (result.length === 0) {
-      result = [...chars];
-    } else {
-      result = result.reduce((prev, each) => {
-        return [...prev, ...chars.map(c => each + c)];
-      }, []);
-    }
+    result = result.reduce((prev, each) => {
+      return [...prev, ...chars.map(c => each + c)];
+    }, []);
   }
   return result;
 }
