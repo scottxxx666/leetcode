@@ -4,21 +4,25 @@ function swap(nums, a, b) {
   nums[b] = temp;
 }
 
+function reverse(nums, start) {
+  for (let k = 0; start + k < nums.length - k; k++) {
+    swap(nums, start + k, nums.length - k - 1);
+  }
+}
+
 function nextPermutation(nums) {
   for (let i = nums.length - 2; i >= 0; i--) {
-    for (let j = i; j < nums.length - 1; j++) {
-      if (nums[j] >= nums[j + 1]) {
-        swap(nums, j, j + 1);
-      } else {
-        const bigger = nums[j + 1];
-        for (let k = j; k >= i; k--) {
-          nums[k + 1] = nums[k];
-        }
-        nums[i] = bigger;
-        return;
+    if (nums[i] < nums[i + 1]) {
+      let j = i + 1;
+      while (j < nums.length && nums[j] > nums[i]) {
+        j++;
       }
+      swap(nums, i, j - 1);
+      reverse(nums, i + 1);
+      return;
     }
   }
+  reverse(nums, 0);
 }
 
 module.exports = nextPermutation;

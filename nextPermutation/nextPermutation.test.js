@@ -36,3 +36,8 @@ test('3 integer exchange start and mid', () => {
   shouldBe([1, 2, 3])
 });
 
+test('multiple integer but only reverse end', () => {
+  given([1, 2, 0, 3, 0, 1, 2, 4]);
+  shouldBe([1, 2, 0, 3, 0, 1, 4, 2])
+});
+
