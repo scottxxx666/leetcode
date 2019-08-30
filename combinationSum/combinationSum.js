@@ -1,10 +1,10 @@
 function findCombinations(candidates, target, result, solution, start) {
+  if (target === 0) {
+    result.push([...solution]);
+  }
   for (let i = start; i < candidates.length; i++) {
     solution.push(candidates[i]);
-    if (target === candidates[i]) {
-      result.push([...solution]);
-    }
-    if (target > candidates[i]) {
+    if (target >= candidates[i]) {
       findCombinations(candidates, target - candidates[i], result, solution, i);
     }
     solution.pop();
