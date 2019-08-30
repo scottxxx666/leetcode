@@ -1,15 +1,19 @@
-function combinationSum(candidates, target) {
-  let result = [];
-  candidates = candidates.sort((a, b) => a - b);
-  for (let i = 0; i < candidates.length && candidates[i] <= target; i++) {
-    if (candidates[i] === target) {
-      result.push([target]);
+function findCombinations(candidates, target, result, solution, start) {
+  for (let i = start; i < candidates.length; i++) {
+    solution.push(candidates[i]);
+    if (target === candidates[i]) {
+      result.push([...solution]);
     }
-    if (target - candidates[i] >= candidates[0]) {
-      let solutions = combinationSum(candidates.filter(e => e >= candidates[i]), target - candidates[i]);
-      result = [...result, ...solutions.map(s => [candidates[i], ...s])];
+    if (target > candidates[i]) {
+      findCombinations(candidates, target - candidates[i], result, solution, i);
     }
+    solution.pop();
   }
+}
+
+function combinationSum(candidates, target) {
+  const result = [];
+  findCombinations(candidates, target, result, [], 0);
   return result;
 }
 

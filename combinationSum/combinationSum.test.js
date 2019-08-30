@@ -9,7 +9,7 @@ function given(c, t) {
 }
 
 function shouldBe(soultions) {
-  expect(combinationSum(candidates, target).sort()).toEqual(soultions.sort());
+  expect(combinationSum(candidates, target).map(e => e.sort((a, b) => a - b)).sort()).toEqual(soultions.sort());
 }
 
 test('1 candidate as same as target', () => {
