@@ -1,15 +1,14 @@
 function strStr(haystack, needle) {
-  if (needle.length < 1) {
-    return 0;
-  }
-  for (let i = 0; i < haystack.length; i++) {
-    if (haystack[i] === needle[0]) {
-      let j = 1;
-      while (i + j < haystack.length && j < needle.length && haystack[i + j] === needle[j]) {
-        j++;
-      }
+  for (let i = 0; ; i++) {
+    for (let j = 0; ; j++) {
       if (j === needle.length) {
         return i;
+      }
+      if (i + j === haystack.length) {
+        return -1;
+      }
+      if (haystack[i + j] !== needle[j]) {
+        break;
       }
     }
   }
