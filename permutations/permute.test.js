@@ -10,11 +10,6 @@ function shouldBe(val) {
   expect(result.sort()).toEqual(val.sort());
 }
 
-test('no num', () => {
-  given([]);
-  shouldBe([]);
-});
-
 test('1 num', () => {
   given([1]);
   shouldBe([
