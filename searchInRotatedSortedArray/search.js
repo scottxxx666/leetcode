@@ -3,22 +3,18 @@ function search(nums, target) {
   let end = nums.length - 1;
   while (start <= end) {
     const key = Math.floor((start + end) / 2);
-    const pointer = nums[key];
+    let pointer = nums[key];
     if (pointer === target) {
       return key;
     }
-    if (pointer >= nums[start]) {
-      if (target <= pointer && target >= nums[start]) {
-        end = key - 1;
-      } else {
-        start = key + 1;
-      }
+    if ((pointer < nums[0]) !== (target < nums[0])) {
+      pointer = target > nums[0] ? Number.POSITIVE_INFINITY : Number.NEGATIVE_INFINITY;
+    }
+   
+    if (pointer > target) {
+      end = key - 1;
     } else {
-      if (target >= pointer && target <= nums[end]) {
-        start = key + 1;
-      } else {
-        end = key - 1;
-      }
+      start = key + 1;
     }
   }
   return -1;
