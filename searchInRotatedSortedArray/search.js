@@ -8,20 +8,16 @@ function search(nums, target) {
       return key;
     }
     if (pointer >= nums[start]) {
-      if (target > pointer) {
-        start = key + 1;
-      } else if (target < nums[start]) {
-        start = key + 1;
-      } else {
+      if (target <= pointer && target >= nums[start]) {
         end = key - 1;
+      } else {
+        start = key + 1;
       }
     } else {
-      if (target < pointer) {
-        end = key - 1;
-      } else if (target > nums[end]) {
-        end = key - 1;
-      } else {
+      if (target >= pointer && target <= nums[end]) {
         start = key + 1;
+      } else {
+        end = key - 1;
       }
     }
   }
