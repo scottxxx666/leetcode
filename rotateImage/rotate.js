@@ -1,7 +1,5 @@
 function swap(matrix, a, b, i, j) {
-  const temp = matrix[a][b];
-  matrix[a][b] = matrix[i][j];
-  matrix[i][j] = temp;
+  [matrix[i][j], matrix[a][b]] = [matrix[a][b], matrix[i][j]];
 }
 
 function rotate(matrix) {
