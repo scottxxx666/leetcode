@@ -1,12 +1,21 @@
+function swap(nums, i, j) {
+  nums[i] += nums[j];
+  nums[j] = nums[i] - nums[j];
+  nums[i] -= nums[j];
+}
+
 function removeElement(nums, val) {
-  let pointer = 0;
-  for (let i = 0; i < nums.length; i++) {
-    if (nums[i] !== val) {
-      nums[pointer] = nums[i];
-      pointer++;
+  let i = 0;
+  let j = nums.length - 1;
+  while (i <= j) {
+    if (nums[i] === val) {
+      swap(nums, i, j);
+      j--;
+    } else {
+      i++;
     }
   }
-  return pointer;
+  return i;
 }
 
 module.exports = removeElement;
