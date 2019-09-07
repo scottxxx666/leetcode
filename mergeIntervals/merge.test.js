@@ -7,7 +7,7 @@ function given(matrix) {
 }
 
 function shouldBe(val) {
-  expect(result).toEqual(val);
+  expect(result.sort()).toEqual(val.sort());
 }
 
 test('1 interval', () => {
@@ -53,5 +53,10 @@ test('interval exactly overlap', () => {
 test('overlap whole interval', () => {
   given([[1, 4], [2, 3]]);
   shouldBe([[1, 4]]);
+});
+
+test('2 overlaps in 4 intervals', () => {
+  given([[1, 3], [2, 6], [8, 10], [15, 18]]);
+  shouldBe([[1, 6], [8, 10], [15, 18]]);
 });
 
