@@ -1,8 +1,11 @@
 function uniquePaths(m, n) {
-  if (m < 2 || n < 2) {
-    return 1;
+  let right = m - 1;
+  let down = n - 1;
+  let result = 1;
+  for (let i = 1; i <= down; i++) {
+    result = result * (right + i) / i;
   }
-  return uniquePaths(m - 1, n) + uniquePaths(m, n - 1);
+  return result;
 }
 
 module.exports = uniquePaths;
