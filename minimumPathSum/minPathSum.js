@@ -1,15 +1,15 @@
 function minPathSum(grid) {
-  for (let i = 0; i < grid.length; i++) {
-    for (let j = 0; j < grid[i].length; j++) {
-      if (i === 0 && j === 0) {
-        continue;
-      }
-      let top = i === 0 ? Number.POSITIVE_INFINITY : grid[i - 1][j];
-      let left = j === 0 ? Number.POSITIVE_INFINITY : grid[i][j - 1];
-      grid[i][j] += Math.min(top, left);
+  let steps = [...grid[0]];
+  for (let i = 1; i < steps.length; i++) {
+    steps[i] += steps[i - 1];
+  }
+  for (let i = 1; i < grid.length; i++) {
+    steps[0] += grid[i][0];
+    for (let j = 1; j < steps.length; j++) {
+      steps[j] = grid[i][j] + Math.min(steps[j - 1], steps[j]);
     }
   }
-  return grid[grid.length - 1][grid[0].length - 1];
+  return steps[steps.length - 1];
 }
 
 module.exports = minPathSum;
