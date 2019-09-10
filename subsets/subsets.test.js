@@ -7,7 +7,7 @@ function given(m) {
 }
 
 function shouldBe(val) {
-  expect(result).toEqual(val);
+  expect(result.sort()).toEqual(val.sort());
 }
 
 test('0 element', () => {
