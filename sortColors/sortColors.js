@@ -7,17 +7,14 @@ function swap(nums, a, b) {
 function sortColors(nums) {
   let firstOne = 0;
   let lastOne = nums.length - 1;
-  let pointer = 0;
-  while (pointer <= lastOne) {
-    if (nums[pointer] < 1) {
-      swap(nums, firstOne, pointer);
+  for (let i = 0; i <= lastOne; i++) {
+    if (nums[i] < 1) {
+      swap(nums, firstOne, i);
       firstOne++;
-      pointer++;
-    } else if (nums[pointer] > 1) {
-      swap(nums, lastOne, pointer);
+    } else if (nums[i] > 1) {
+      swap(nums, lastOne, i);
       lastOne--;
-    } else {
-      pointer++;
+      i--;
     }
   }
 }
