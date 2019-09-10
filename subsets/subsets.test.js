@@ -30,8 +30,3 @@ test('3 diff element', () => {
   shouldBe([[], [0], [1], [2], [0, 1], [0, 2], [1, 2], [0, 1, 2]]);
 });
 
-test('multiple duplicate elements', () => {
-  given([0, 1, 2, 2, 1, 0]);
-  shouldBe([[], [0], [1], [2], [0, 1], [0, 2], [1, 2], [0, 1, 2]]);
-});
-
