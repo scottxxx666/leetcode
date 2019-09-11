@@ -2,6 +2,9 @@ function search(result, board, word, set, i, j, wordIndex) {
   if (result.find === true) {
     return;
   }
+  if (i < 0 || i >= board.length || j < 0 || j >= board[0].length) {
+    return;
+  }
   const key = [i, j].join(',');
   if (set.has(key)) {
     return;
@@ -14,18 +17,10 @@ function search(result, board, word, set, i, j, wordIndex) {
     return;
   }
   set.add(key);
-  if (i > 0) {
-    search(result, board, word, set, i - 1, j, wordIndex + 1);
-  }
-  if (i < board.length - 1) {
-    search(result, board, word, set, i + 1, j, wordIndex + 1);
-  }
-  if (j > 0) {
-    search(result, board, word, set, i, j - 1, wordIndex + 1);
-  }
-  if (j < board[0].length - 1) {
-    search(result, board, word, set, i, j + 1, wordIndex + 1);
-  }
+  search(result, board, word, set, i - 1, j, wordIndex + 1);
+  search(result, board, word, set, i + 1, j, wordIndex + 1);
+  search(result, board, word, set, i, j - 1, wordIndex + 1);
+  search(result, board, word, set, i, j + 1, wordIndex + 1);
   set.delete(key);
 }
 
