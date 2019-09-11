@@ -1,11 +1,16 @@
+function nextSubsets(nums, result, subset, start) {
+  for (let i = start; i < nums.length; i++) {
+    subset.push(nums[i]);
+    result.push([...subset]);
+    nextSubsets(nums, result, subset, i + 1)
+    subset.pop();
+  }
+}
+
 function subsets(nums) {
   const result = [[]];
-  for (let i = 0; i < nums.length; i++) {
-    const length = result.length;
-    for (let j = 0; j < length; j++) {
-      result.push([...result[j], nums[i]]);
-    }
-  }
+  const subset = [];
+  nextSubsets(nums, result, subset, 0);
   return result;
 }
 
