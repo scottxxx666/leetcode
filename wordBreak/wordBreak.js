@@ -1,13 +1,5 @@
 function match(s, word, sIndex) {
-  if (s.length - sIndex < word.length) {
-    return false;
-  }
-  for (let i = 0; i < word.length; i++) {
-    if (s[sIndex + i] !== word[i]) {
-      return false;
-    }
-  }
-  return true;
+  return s.substring(sIndex, sIndex + word.length).includes(word);
 }
 
 function wordBreak(s, wordDict, sIndex = 0) {
