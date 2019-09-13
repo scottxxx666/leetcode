@@ -1,23 +1,13 @@
 function majorityElement(nums) {
-  const map = new Map();
-  nums.forEach(n => {
-    if (map.has(n)) {
-      map.set(n, map.get(n) + 1);
-    } else {
-      map.set(n, 1)
+  let candidate = nums[0];
+  let times = 0;
+  for (let num of nums) {
+    if (times === 0) {
+      candidate = num;
     }
-  });
-
-  let majority = nums[0];
-  let maxTimes = map.get(majority);
-  for (let [num, times] of map) {
-    if (times > maxTimes) {
-      maxTimes = times;
-      majority = num;
-    }
+    times += num === candidate ? 1 : -1;
   }
-  return majority;
+  return candidate;
 }
-
 
 module.exports = majorityElement;
