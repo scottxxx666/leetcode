@@ -5,10 +5,11 @@ function match(s, word, sIndex) {
 function wordBreak(s, wordDict) {
   const dp = new Array(s.length + 1).fill(false);
   dp[0] = true;
-  for (let i = 0; i < s.length; i++) {
+  for (let i = 1; i <= s.length; i++) {
     for (let word of wordDict) {
-      if (match(s, word, i) && dp[i]) {
-        dp[i + word.length] = true;
+      if (word.length <= i && match(s, word, i - word.length) && dp[i - word.length]) {
+        dp[i] = true;
+        break;
       }
     }
   }
