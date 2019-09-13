@@ -1,5 +1,5 @@
 function match(s, word, sIndex) {
-  return s.substring(sIndex, sIndex + word.length).includes(word);
+  return s.substring(sIndex, sIndex + word.length) === word;
 }
 
 function wordBreak(s, wordDict) {
