@@ -4,7 +4,7 @@ function LRUCache(capacity) {
   this.map = new Map();
 }
 
-const Node = function (key, val) {
+const Node = function (key = null, val = null) {
   this.key = key;
   this.val = val;
   this.next = null;
@@ -12,45 +12,30 @@ const Node = function (key, val) {
 };
 
 const LinkList = function () {
-  this.head = null;
-  this.tail = null;
+  this.head = new Node();
+  this.tail = new Node();
+  this.head.next = this.tail;
+  this.tail.prev = this.head;
 };
 
 LinkList.prototype.add = function (node) {
-  if (this.head === null) {
-    this.head = node;
-    this.tail = node;
-    return;
-  }
-  this.tail.next = node;
-  node.prev = this.tail;
-  this.tail = node;
+  node.prev = this.tail.prev;
+  node.next = this.tail;
+  this.tail.prev.next = node;
+  this.tail.prev = node;
 };
 
 LinkList.prototype.remove = function () {
-  const target = this.head;
-  this.head = this.head.next;
+  const target = this.head.next;
+  this.head.next = target.next;
+  target.next.prev = this.head;
   return target;
 };
 
 LinkList.prototype.moveToEnd = function (node) {
-  if (node === this.tail) {
-    return;
-  }
-  if (node === this.head && node.next) {
-    this.head = this.head.next;
-  }
-
-  if (node.prev) {
-    node.prev.next = node.next;
-  }
-  if (node.next) {
-    node.next.prev = node.prev;
-  }
-  node.prev = this.tail;
-  node.next = null;
-  this.tail.next = node;
-  this.tail = node;
+  node.prev.next = node.next;
+  node.next.prev = node.prev;
+  this.add(node);
 };
 
 LRUCache.prototype.get = function (key) {
@@ -71,7 +56,6 @@ LRUCache.prototype.put = function (key, value) {
     return;
   }
   if (this.map.size === this.capacity) {
-
     const removed = this.linkList.remove();
     if (removed) {
       this.map.delete(removed.key);
