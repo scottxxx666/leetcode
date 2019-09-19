@@ -1,14 +1,12 @@
 rob = function (nums) {
-  let evenMax = 0;
-  let oddMax = 0;
+  let last = 0;
+  let last2 = 0;
   for (let i = 0; i < nums.length; i++) {
-    if (i % 2 === 0) {
-      evenMax = Math.max(oddMax, evenMax + nums[i]);
-    } else {
-      oddMax = Math.max(evenMax, oddMax + nums[i]);
-    }
+    const temp = Math.max(last + nums[i], last2);
+    last = last2;
+    last2 = temp;
   }
-  return Math.max(evenMax, oddMax);
+  return Math.max(last, last2);
 };
 
 module.exports = rob;
