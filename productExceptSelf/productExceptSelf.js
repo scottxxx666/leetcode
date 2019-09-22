@@ -4,9 +4,10 @@ productExceptSelf = function (nums) {
   for (let i = nums.length - 2; i >= 0; i--) {
     result[i] = result[i + 1] * nums[i + 1];
   }
-  for (let i = 1; i < nums.length; i++) {
-    nums[i] = nums[i - 1] * nums[i];
-    result[i] = result[i] * nums[i - 1];
+  let left = 1;
+  for (let i = 0; i < nums.length; i++) {
+    result[i] = result[i] * left;
+    left *= nums[i];
   }
   return result;
 };
