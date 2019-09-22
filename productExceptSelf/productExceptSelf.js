@@ -1,28 +1,14 @@
 productExceptSelf = function (nums) {
-  let hasZero = false;
-  let twoZero = false;
-  let product = nums.reduce((prev, current) => {
-    if (current === 0) {
-      if (hasZero) {
-        twoZero = true;
-      }
-      hasZero = true;
-      return prev;
-    }
-    return prev * current;
-  }, 1);
-  if (twoZero) {
-    return nums.map(e => 0);
+  const result = new Array(nums.length);
+  result[result.length - 1] = 1;
+  for (let i = nums.length - 2; i >= 0; i--) {
+    result[i] = result[i + 1] * nums[i + 1];
   }
-  return nums.map(e => {
-    if (e === 0) {
-      return product;
-    }
-    if (hasZero) {
-      return 0;
-    }
-    return product / e;
-  });
+  for (let i = 1; i < nums.length; i++) {
+    nums[i] = nums[i - 1] * nums[i];
+    result[i] = result[i] * nums[i - 1];
+  }
+  return result;
 };
 
 module.exports = productExceptSelf;
