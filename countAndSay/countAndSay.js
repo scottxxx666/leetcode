@@ -15,11 +15,7 @@ countAndSay = function (n) {
       count = 1;
     }
   }
-  if (last.length >= 2 && last[last.length - 1] === last[last.length - 2]) {
-    result += count + last[last.length - 1];
-  } else {
-    result += 1 + last[last.length - 1]
-  }
+  result += count + last[last.length - 1];
   return result;
 };
 
