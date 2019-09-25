@@ -1,15 +1,14 @@
 lengthOfLastWord = function (s) {
-  let result = 0;
   let count = 0;
-  for (let i = 0; i < s.length; i++) {
-    if (s[i] === ' ') {
-      count = 0;
-      continue;
-    }
-    count++;
-    result = count;
+  let tail = s.length - 1;
+  while (tail >= 0 && s[tail] === ' ') {
+    tail--;
   }
-  return result;
+  while (tail >= 0 && s[tail] !== ' ') {
+    count++;
+    tail--;
+  }
+  return count;
 };
 
 module.exports = lengthOfLastWord;
