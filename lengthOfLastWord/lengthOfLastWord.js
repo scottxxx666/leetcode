@@ -1,18 +1,13 @@
 lengthOfLastWord = function (s) {
   let result = 0;
-  let lastNonZero = 0;
+  let count = 0;
   for (let i = 0; i < s.length; i++) {
-    if (s[i] !== ' ') {
-      result++;
+    if (s[i] === ' ') {
+      count = 0;
       continue;
     }
-    if (result !== 0) {
-      lastNonZero = result;
-    }
-    result = 0;
-  }
-  if (result === 0) {
-    return lastNonZero;
+    count++;
+    result = count;
   }
   return result;
 };
