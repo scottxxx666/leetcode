@@ -6,17 +6,12 @@ convert = function (s, numRows) {
   let result = '';
   const maxInterval = (numRows - 1) * 2;
   for (let i = 0; i < numRows; i++) {
-    let interval = maxInterval - i * 2;
-    if (interval === 0) {
-      interval = maxInterval;
-    }
+    let interval = maxInterval - i * 2 || maxInterval;
     let j = 0;
     while ((i + j) < s.length) {
       result += s.charAt(i + j);
       j += interval;
-      if (interval !== 0 && interval !== maxInterval) {
-        interval = maxInterval - interval
-      }
+      interval = maxInterval - interval || maxInterval;
     }
   }
   return result;
