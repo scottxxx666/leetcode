@@ -4,19 +4,21 @@ searchInsert = function (nums, target) {
   }
   let start = 0;
   let end = nums.length - 1;
-  while (start <= end) {
+  while (start < end) {
     const pointer = Math.floor((start + end) / 2);
     if (nums[pointer] === target) {
       return pointer;
     }
     if (nums[pointer] > target) {
-      end = pointer - 1;
+      end = pointer;
     } else {
       start = pointer + 1;
     }
   }
-  const result = Math.round((start + end) / 2);
-  return result <= 0 ? 0 : result;
+  if (nums[end] < target) {
+    return end + 1;
+  }
+  return end;
 };
 
 module.exports = searchInsert;
