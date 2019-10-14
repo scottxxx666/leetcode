@@ -5,17 +5,17 @@ module.exports = function (nums) {
     let low = i + 1;
     let high = input.length - 1;
     while (low < high) {
-      const sum = input[i] + input[low] + input[high];
+      const lowInput = input[low];
+      const highInput = input[high];
+      const sum = input[i] + lowInput + highInput;
       if (sum === 0) {
-        result.push([input[i], input[low], input[high]]);
-        while (high >= 1 && input[high - 1] === input[high]) {
+        result.push([input[i], lowInput, highInput]);
+        while (low < high && input[high] === highInput) {
           high--;
         }
-        if (low < input.length - 1 && input[low] === input[low + 1]) {
+        if (low < high && input[low] === lowInput) {
           low++;
         }
-        high--;
-        low++;
       } else if (sum > 0) {
         high--;
       } else {
