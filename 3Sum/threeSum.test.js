@@ -32,8 +32,23 @@ test('4 elements 2 solution', () => {
   ]);
 });
 
-test('solution no duplicate', () => {
+test('5 elements 2 solution', () => {
+  given([-2, 0, 1, 1, 2]);
+  shouldBe([
+    [-2, 0, 2],
+    [-2, 1, 1],
+  ]);
+});
+
+test('solution no duplicate (duplicate max)', () => {
   given([0, -1, 1, 1]);
+  shouldBe([
+    [-1, 0, 1]
+  ]);
+});
+
+test('solution no duplicate (duplicate min)', () => {
+  given([-1, 0, -1, 1, 1]);
   shouldBe([
     [-1, 0, 1]
   ]);
