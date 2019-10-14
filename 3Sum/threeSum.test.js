@@ -54,3 +54,10 @@ test('solution no duplicate (duplicate min)', () => {
   ]);
 });
 
+test('2 duplicate solution', () => {
+  given([-2, 0, 0, 2, 2]);
+  shouldBe([
+    [-2, 0, 2]
+  ]);
+});
+
