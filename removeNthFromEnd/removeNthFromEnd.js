@@ -1,20 +1,19 @@
+const ListNode = require('./listNode');
+
 module.exports = function (head, n) {
-  let fast = head;
-  for (let i = 0; i < n; i++) {
+  const start = new ListNode();
+  start.next = head;
+  let fast = start;
+  for (let i = 0; i <= n; i++) {
     fast = fast.next;
   }
 
-  if (fast === null) {
-    head = head.next;
-    return head;
-  }
-  fast = fast.next;
-  let slow = head;
+  let slow = start;
   while (fast !== null) {
     fast = fast.next;
     slow = slow.next;
   }
   slow.next = slow.next.next;
-  return head;
+  return start.next;
 };
 
