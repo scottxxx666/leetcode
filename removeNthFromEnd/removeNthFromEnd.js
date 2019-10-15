@@ -1,15 +1,20 @@
 module.exports = function (head, n) {
-  let array = [];
-  let pointer = head;
-  while (pointer !== null) {
-    array.push(pointer);
-    pointer = pointer.next;
+  let fast = head;
+  for (let i = 0; i < n; i++) {
+    fast = fast.next;
   }
-  if (array[array.length - n] === head) {
-    head = array[array.length - n].next;
-  } else {
-    array[array.length - n - 1].next = array[array.length - n].next;
+
+  if (fast === null) {
+    head = head.next;
+    return head;
   }
+  fast = fast.next;
+  let slow = head;
+  while (fast !== null) {
+    fast = fast.next;
+    slow = slow.next;
+  }
+  slow.next = slow.next.next;
   return head;
 };
 
