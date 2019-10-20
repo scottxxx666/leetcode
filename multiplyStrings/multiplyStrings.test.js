@@ -40,3 +40,8 @@ test('product is zero', () => {
   shouldBe('0');
 });
 
+test('mid zero', () => {
+  given('6', '501');
+  shouldBe('3006');
+});
+
