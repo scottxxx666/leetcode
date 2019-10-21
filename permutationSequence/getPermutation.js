@@ -1,21 +1,19 @@
 module.exports = function (n, k) {
   const set = new Set(Array(n).fill(0).map((value, key) => key + 1));
-  const factorial = new Array(n);
-  let temp = 1;
-  factorial[0] = 1;
-  for (let i = 1; i < factorial.length; i++) {
-    temp *= i;
-    factorial[i] = temp;
+  let factorial = 1;
+  for (let i = 1; i <= n; i++) {
+    factorial *= i;
   }
-
+  k = k - 1;
   let key = k;
   const solution = [];
   for (let i = n; i > 0; i--) {
-    key = k === 0 ? i : Math.ceil(k / factorial[i - 1]);
-    const digit = [...set][key - 1];
+    factorial = factorial / i;
+    key = Math.floor(k / factorial);
+    const digit = [...set][key];
     solution.push(digit);
     set.delete(digit);
-    k = k % factorial[i - 1];
+    k = k % factorial;
   }
   return solution.join('');
 };
