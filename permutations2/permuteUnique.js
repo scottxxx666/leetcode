@@ -1,24 +1,25 @@
-function permutation(nums, solutions, solution) {
-  if (nums.length === 0) {
-    solutions.push([...solution]);
+function swap(nums, i, j) {
+  const temp = nums[i];
+  nums[i] = nums[j];
+  nums[j] = temp;
+}
+
+function permutation(nums, solutions, start) {
+  if (start === nums.length - 1) {
+    solutions.push([...nums]);
     return;
   }
-  for (let i = 0; i < nums.length; i++) {
-    if (i > 0 && nums[i] === nums[i - 1]) {
+  for (let i = start; i < nums.length; i++) {
+    if (i !== start && nums[start] === nums[i]) {
       continue;
     }
-    const target = nums[i];
-    solution.push(target);
-    nums.splice(i, 1);
-    permutation(nums, solutions, solution);
-    solution.pop();
-    nums.splice(i, 0, target);
+    swap(nums, start, i);
+    permutation([...nums], solutions, start + 1);
   }
 }
 
 module.exports = function (nums) {
-  const solution = [];
   const result = [];
-  permutation(nums.sort((a, b) => a - b), result, solution);
+  permutation(nums.sort((a, b) => a - b), result, 0);
   return result;
 };
