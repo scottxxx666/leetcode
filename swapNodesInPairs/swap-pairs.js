@@ -1,17 +1,11 @@
 const ListNode = require('./list-node');
 
-module.exports = function (head) {
-  const front = new ListNode();
-  front.next = head;
-  let pointer = front;
-
-  while (pointer.next && pointer.next.next) {
-    const temp = pointer.next.next;
-    pointer.next.next = temp.next;
-    temp.next = pointer.next;
-    pointer.next = temp;
-
-    pointer = pointer.next.next;
+module.exports = function swap(head) {
+  if (head === null || head.next === null) {
+    return head;
   }
-  return front.next;
+  const temp = head.next;
+  head.next = swap(head.next.next);
+  temp.next = head;
+  return temp;
 };
