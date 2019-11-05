@@ -1,29 +1,29 @@
-function checkEnough(diff, isGreatZero) {
-  return isGreatZero ? diff >= 0 : diff <= 0;
-}
-
 module.exports = function divide(dividend, divisor) {
-  if (dividend === 0) {
-    return 0;
-  }
-  let diff = dividend;
-
   let result = 0;
-  if (Math.abs(dividend - divisor) <= Math.abs(dividend)) {
-    while (checkEnough(diff, dividend >= 0)) {
-      diff = diff - divisor;
+  let minus = false;
+  if ((dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0)) {
+    minus = true;
+  }
+  dividend = Math.abs(dividend);
+  let absDivisor = Math.abs(divisor);
+  let last = 0;
+  while (dividend >= absDivisor) {
+    last = absDivisor;
+    absDivisor += absDivisor;
+    if (result === 0) {
       result++;
+    } else {
+      result += result;
     }
-    result--;
-  } else {
-    while (checkEnough(diff, dividend >= 0)) {
-      diff = diff + divisor;
-      result--;
-    }
+  }
+  let diff = dividend - last;
+  while (diff >= 0) {
+    diff -= Math.abs(divisor);
     result++;
   }
-  if (result > 2 ** 31 - 1 || result < (-2) ** 31) {
+  result--;
+  if ((result > 2 ** 31 - 1 && !minus) || (result > 2 ** 31 && minus)) {
     return 2 ** 31 - 1;
   }
-  return result;
+  return minus ? -result : result;
 };
