@@ -1,29 +1,31 @@
-module.exports = (numCourses, prerequisites) => {
-  const dp = [];
-  for (let i = 0; i < numCourses; i++) {
-    const arr = new Array(numCourses).fill(0);
-    dp.push(arr);
+function setGraph(require, pre, course) {
+  if (require.has(pre)) {
+    require.get(pre).push(course);
+  } else {
+    require.set(pre, [course]);
   }
-  for (let each of prerequisites) {
-    const [course, pre] = each;
-    dp[course][pre] = 1;
+}
+
+module.exports = (numCourses, prerequisites) => {
+  const require = new Map();
+  const incoming = new Array(numCourses).fill(0);
+  for (let [course, pre] of prerequisites) {
+    incoming[course]++;
+    setGraph(require, pre, course);
   }
 
   for (let i = 0; i < numCourses; i++) {
-    for (let j = 0; j < numCourses; j++) {
-      if (dp[i][j] === 1) {
-        if (dp[j][i] === 1) {
-          return false;
-        }
-        for (let k = 0; k < numCourses; k++) {
-          if (dp[j][k] === 1) {
-            if (dp[k][i] === 1) {
-              return false;
-            }
-            dp[i][k] = 1;
-          }
-        }
-      }
+    const index = incoming.findIndex(e => e === 0);
+    if (index === -1) {
+      return false;
+    }
+    incoming[index] = -1;
+    if (!require.has(index)) {
+      continue;
+    }
+    const temp = require.get(index);
+    for (let each of temp) {
+      incoming[each]--;
     }
   }
 
