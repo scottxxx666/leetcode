@@ -1,29 +1,28 @@
 const isHappy = (n) => {
-  const set = new Set();
-  return isHappyEver(set, n);
+  let slow = n;
+  let fast = n;
+  while (true) {
+    slow = sum(slow);
+    fast = sum(fast);
+    fast = sum(fast);
+    if (slow === fast) {
+      if (slow === 1) {
+        return true;
+      }
+      return false;
+    }
+  }
 };
 
-function isHappyEver(set, n) {
-  if (n === 1) {
-    return true;
-  }
-  if (set.has(n)) {
-    return false;
-  }
-  set.add(n);
-  return isHappyEver(set, sum(n));
-}
-
-function sum(n) {
+const sum = (n) => {
   let temp = n;
   let sum = 0;
-  while (temp >= 10) {
-    const each = temp % 10;
-    sum += each ** 2;
+  while (temp > 0) {
+    const digit = temp % 10;
+    sum += digit ** 2;
     temp = Math.floor(temp / 10);
   }
-  sum += temp ** 2;
   return sum;
-}
+};
 
 module.exports = isHappy;
