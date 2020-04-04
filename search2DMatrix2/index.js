@@ -1,26 +1,15 @@
-function search(matrix, target, row) {
-  let start = 0;
-  let end = matrix[0].length;
-  let index = start;
-  while (start <= end) {
-    index = Math.floor((start + end) / 2);
-    let temp = matrix[row][index];
-    if (temp === target) {
+module.exports = (matrix, target) => {
+  let i = 0;
+  let j = matrix[0] ? matrix[0].length - 1 : -1;
+  while (i < matrix.length && j >= 0) {
+    if (matrix[i][j] === target) {
       return true;
     }
-    if (temp > target) {
-      end = index - 1;
+    if (matrix[i][j] > target) {
+      j--;
     } else {
-      start = index + 1;
+      i++;
     }
   }
   return false;
-}
-
-module.exports = (matrix, target) => {
-  let result = false;
-  for (let i = 0; i < matrix.length; i++) {
-    result = result || search(matrix, target, i);
-  }
-  return result;
 };
