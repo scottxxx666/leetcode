@@ -1,11 +1,9 @@
 module.exports = function (prices) {
   let sum = 0;
-  let min = Number.MAX_SAFE_INTEGER;
   for (let i = 0; i < prices.length; i++) {
-    if (prices[i] > min) {
-      sum += prices[i] - min;
+    if (prices[i] > prices[i - 1]) {
+      sum += prices[i] - prices[i - 1];
     }
-    min = prices[i];
   }
   return sum;
 };
