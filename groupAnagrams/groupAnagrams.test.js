@@ -1,5 +1,3 @@
-const groupAnagrams = require('./groupAnagrams');
-
 let result;
 
 function given(matrix) {
@@ -29,21 +27,21 @@ test('2 char 2 element 2 anagrams', () => {
   given(["ab", "bc"]);
   shouldBe([
     ["ab"],
-    ["bc"]
+    ["bc"],
   ]);
 });
 
 test('2 char 2 element 1 anagrams', () => {
   given(["ab", "ba"]);
   shouldBe([
-    ["ab", "ba"]
+    ["ab", "ba"],
   ]);
 });
 
 test('3 char 3 element 1 anagrams', () => {
   given(["abc", "cba", "cab"]);
   shouldBe([
-    ["abc", "cba", "cab"]
+    ["abc", "cba", "cab"],
   ]);
 });
 
@@ -51,7 +49,7 @@ test('3 char 3 element 2 anagrams (first diff)', () => {
   given(["cbd", "abc", "cab"]);
   shouldBe([
     ["cbd"],
-    ["abc", "cab"]
+    ["abc", "cab"],
   ]);
 });
 
@@ -59,7 +57,7 @@ test('3 char 3 element 2 anagrams (mid diff)', () => {
   given(["abc", "cbd", "cab"]);
   shouldBe([
     ["abc", "cab"],
-    ["cbd"]
+    ["cbd"],
   ]);
 });
 
@@ -67,7 +65,7 @@ test('3 char 3 element 2 anagrams (last diff)', () => {
   given(["abc", "cab", "cbd"]);
   shouldBe([
     ["abc", "cab"],
-    ["cbd"]
+    ["cbd"],
   ]);
 });
 
@@ -76,7 +74,7 @@ test('3 char 3 element 3 anagrams', () => {
   shouldBe([
     ["abc"],
     ["ab"],
-    ["c"]
+    ["c"],
   ]);
 });
 
@@ -88,5 +86,10 @@ test('duplicate char in 1 string', () => {
 test('same chars and length but diff strings', () => {
   given(["boo", "bob"]);
   shouldBe([["boo"], ["bob"]]);
+});
+
+test('same chars and same string', () => {
+  given(["pup", "pup"]);
+  shouldBe([["pup", "pup"]]);
 });
 
