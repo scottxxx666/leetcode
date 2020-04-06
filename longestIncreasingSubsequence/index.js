@@ -1,14 +1,31 @@
-module.exports = (nums) => {
-  if (nums.length === 0) {
-    return 0;
-  }
-  const dp = new Array(nums.length + 1).fill(1);
-  for (let i = 0; i < nums.length; i++) {
-    for (let j = 0; j < i; j++) {
-      if (nums[i] > nums[j]) {
-        dp[i + 1] = Math.max(dp[i + 1], dp[j + 1] + 1);
-      }
+function binarySearch(nums, target) {
+  let start = 0;
+  let end = nums.length - 1;
+  while (start <= end) {
+    const index = Math.floor((start + end) / 2);
+    if (nums[index] === target) {
+      return index;
+    }
+    if (nums[index] > target) {
+      end = index - 1;
+    } else {
+      start = index + 1;
     }
   }
-  return Math.max(...dp);
+  return start;
+}
+
+module.exports = (nums) => {
+  const dp = [];
+  let length = 0;
+  for (let i = 0; i < nums.length; i++) {
+    let index = binarySearch(dp, nums[i]);
+    if (index > dp.length - 1) {
+      dp.push(nums[i]);
+      length++;
+    } else {
+      dp[index] = nums[i];
+    }
+  }
+  return length;
 };
