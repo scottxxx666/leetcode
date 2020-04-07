@@ -8,11 +8,7 @@ module.exports = (arr) => {
     }
   }
 
-  let result = 0;
-  for (let [key, value] of map.entries()) {
-    if (map.has(key + 1)) {
-      result += value;
-    }
-  }
-  return result;
+  return [...map.entries()].reduce((prev, [key, value]) => {
+    return map.has(key + 1) ? prev + value : prev;
+  }, 0);
 };
