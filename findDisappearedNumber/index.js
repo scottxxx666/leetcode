@@ -1,12 +1,15 @@
 module.exports = function (nums) {
-  const result = new Array(nums.length).fill(1);
+  const result = [];
   for (let num of nums) {
-    result[num - 1] = 0;
-  }
-  for (let i = 0; i < nums.length; i++) {
-    if (result[i] === 1) {
-      result[i] = i + 1;
+    const key = Math.abs(num) - 1;
+    if (nums[key] > 0) {
+      nums[key] = -nums[key];
     }
   }
-  return result.filter(e => e > 0);
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] > 0) {
+      result.push(i + 1);
+    }
+  }
+  return result;
 };
