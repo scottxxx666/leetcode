@@ -7,7 +7,7 @@ function createNestedIntegers(nestedList) {
   let input = [];
   for (let each of nestedList) {
     if (Array.isArray(each)) {
-      input.push(createNestedIntegers(each));
+      input.push(new NestedInteger(createNestedIntegers(each)));
     } else {
       input.push(new NestedInteger(each));
     }

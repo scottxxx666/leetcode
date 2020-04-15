@@ -1,39 +1,48 @@
 function NestedIterator(nestedList) {
-  function spread(arr, list, i) {
-    const target = list[i];
-    if (!target) {
-      return;
-    }
-    if (Array.isArray(target)) {
-      for (let j = 0; j < target.length; j++) {
-        spread(arr, target, j);
-      }
-      return;
-    }
-    if (target.isInteger()) {
-      arr.push(target.getInteger());
-      return;
-    }
-    const nextList = target.getList();
-    for (let j = 0; j < nextList.length; j++) {
-      spread(arr, nextList, j);
-    }
-  }
-
-  this.list = [];
-  for (let i = 0; i < nestedList.length; i++) {
-    spread(this.list, nestedList, i);
-  }
+  this.list = nestedList;
   this.pointer = 0;
   this.target = null;
+  this.update();
 }
 
 NestedIterator.prototype.hasNext = function () {
-  return this.pointer <= this.list.length - 1;
+  if (!this.target || (this.target instanceof NestedIterator && !this.target.hasNext())) {
+    return false;
+  }
+  return true;
+};
+
+NestedIterator.prototype.update = function () {
+  if (this.hasNext() || this.pointer >= this.list.length) {
+    return;
+  }
+  const newTarget = this.list[this.pointer];
+  if (newTarget.isInteger()) {
+    this.target = newTarget;
+    return;
+  }
+  this.target = new NestedIterator(newTarget.getList());
+  if (!this.target.hasNext()) {
+    this.pointer++;
+    this.update();
+  }
 };
 
 NestedIterator.prototype.next = function () {
-  return this.list[this.pointer++];
+  if (this.target instanceof NestedIterator) {
+    const result = this.target.next();
+    if (!this.target.hasNext()) {
+      this.pointer++;
+      this.target = null;
+      this.update();
+    }
+    return result;
+  }
+  const result = this.target.getInteger();
+  this.pointer++;
+  this.target = null;
+  this.update();
+  return result;
 };
 
 module.exports = NestedIterator;
