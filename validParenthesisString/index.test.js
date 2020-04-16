@@ -75,3 +75,13 @@ test('* not enough', function () {
   shouldBe(false);
 });
 
+test('difficult', function () {
+  given('((()))()(())(*()()())**(())()()()()((*()*))((*()*)');
+  shouldBe(true);
+});
+
+test('difficult 2', function () {
+  given('(())((())()()(*)(*()(())())())()()((()())((()))(*');
+  shouldBe(false);
+});
+

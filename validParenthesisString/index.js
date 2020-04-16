@@ -1,33 +1,21 @@
-function add(newSet, e) {
-  if (e >= 0) {
-    newSet.add(e);
-  }
-}
-
 module.exports = (s) => {
-  let set = new Set([0]);
+  let max = 0;
+  let min = 0;
   for (let each of s) {
-    if (each === '*') {
-      let newSet = new Set();
-      for (let e of set) {
-        add(newSet, e + 1);
-        add(newSet, e);
-        add(newSet, e - 1);
-      }
-      set = newSet;
-    } else if (each === '(') {
-      let newSet = new Set();
-      for (let e of set) {
-        add(newSet, e + 1);
-      }
-      set = newSet;
+    if (each === '(') {
+      max++;
+      min++;
+    } else if (each === ')') {
+      max--;
+      min--;
     } else {
-      const newSet = new Set();
-      for (let e of set) {
-        add(newSet, e - 1);
-      }
-      set = newSet;
+      max++;
+      min--;
     }
+    if (max < 0) {
+      return false;
+    }
+    min = Math.max(min, 0);
   }
-  return [...set].some(e => e === 0);
+  return min <= 0;
 };
