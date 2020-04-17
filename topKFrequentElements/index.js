@@ -6,18 +6,14 @@ function swap(counts, i, j) {
 
 function getTop(counts, left, right) {
   const [_, target] = counts[left];
-  let i = left;
-  let j = right;
-  while (i <= j) {
-    if (counts[i][1] >= target) {
-      i++;
-    } else {
-      swap(counts, i, j);
-      j--;
+  let i = right;
+  for (let j = right; j > left; j--) {
+    if (counts[j][1] < target) {
+      swap(counts, i--, j);
     }
   }
-  swap(counts, left, i - 1);
-  return i - 1;
+  swap(counts, left, i);
+  return i;
 }
 
 module.exports = (nums, k) => {
