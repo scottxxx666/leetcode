@@ -35,3 +35,13 @@ test('3 element top 2', function () {
   shouldBe([2, 3]);
 });
 
+test('3 element top 2', function () {
+  given([1, 2], 2);
+  shouldBe([2, 1]);
+});
+
+test('3 element top 2', function () {
+  given([5, 2, 5, 3, 5, 3, 1, 1, 3], 2);
+  shouldBe([3, 5]);
+});
+
