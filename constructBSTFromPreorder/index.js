@@ -1,21 +1,16 @@
 const TreeNode = require("./treeNode");
-module.exports = (preorder) => {
-  const head = new TreeNode(preorder[0]);
-  const prev = [];
-  let pointer = head;
-  for (let i = 1; i < preorder.length; i++) {
-    const target = preorder[i];
-    if (target < pointer.val) {
-      pointer.left = new TreeNode(target);
-      prev.push(pointer);
-      pointer = pointer.left;
-      continue;
+module.exports = function bstFromPreorder(preorder) {
+  let i = 0;
+
+  function build(max) {
+    if (i >= preorder.length || preorder[i] > max) {
+      return null;
     }
-    while (prev.length > 0 && prev[prev.length - 1].val < target) {
-      pointer = prev.pop();
-    }
-    pointer.right = new TreeNode(target);
-    pointer = pointer.right;
+    const node = new TreeNode(preorder[i]);
+    node.left = build(preorder[i++]);
+    node.right = build(max);
+    return node;
   }
-  return head;
+
+  return build(preorder, Number.MAX_SAFE_INTEGER);
 };
