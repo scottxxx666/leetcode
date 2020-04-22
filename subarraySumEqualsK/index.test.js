@@ -50,3 +50,13 @@ test('3 num 2 solution II', function () {
   shouldBe(2);
 });
 
+test('3 num 2 solution III', function () {
+  given([1, 2, 3], 3);
+  shouldBe(2);
+});
+
+test('duplicate', function () {
+  given([0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 0);
+  shouldBe(55);
+});
+
