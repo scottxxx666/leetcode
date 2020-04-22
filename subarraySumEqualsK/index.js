@@ -1,10 +1,10 @@
 module.exports = (nums, k) => {
   let result = 0;
-  for (let i = 1; i <= nums.length; i++) {
-    const dp = new Array(nums.length + 1).fill(0);
-    for (let j = i; j <= nums.length; j++) {
-      dp[j] = dp[j - 1] + nums[j - 1];
-      if (dp[j] === k) {
+  for (let i = 0; i < nums.length; i++) {
+    let sum = 0;
+    for (let j = i; j < nums.length; j++) {
+      sum = sum + nums[j];
+      if (sum === k) {
         result++;
       }
     }
