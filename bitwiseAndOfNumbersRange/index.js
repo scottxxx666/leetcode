@@ -1,17 +1,12 @@
 module.exports = function rangeBitwiseAnd(m, n) {
-  let result = 0;
   if (m === 0) {
     return 0;
   }
-  const low = Math.floor(Math.log2(m));
-  const high = Math.floor(Math.log2(n));
-  if (low !== high) {
-    return 0;
+  let bitMove = 1;
+  while (m !== n) {
+    m >>= 1;
+    n >>= 1;
+    bitMove <<= 1;
   }
-  if (low === 0) {
-    return m;
-  }
-  const exclude = 2 ** low;
-  result += exclude + rangeBitwiseAnd(m - exclude, n - exclude);
-  return result;
+  return m * bitMove;
 };
