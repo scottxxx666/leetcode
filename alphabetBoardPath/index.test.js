@@ -52,7 +52,7 @@ test('zb', function () {
 
 test('zdz', function () {
   given('zdz');
-  shouldBe('DDDDD!UUUUURRR!DDDDLLLD!');
+  shouldBe('DDDDD!UUUUURRR!LLLDDDDD!');
 });
 
 test('zz', function () {
