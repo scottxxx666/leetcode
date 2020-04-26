@@ -50,3 +50,8 @@ test('difficult', function () {
   shouldBe(2);
 });
 
+test('difficult2', function () {
+  given('bsbininm', 'jmjkbkjkv');
+  shouldBe(1);
+});
+
