@@ -5,13 +5,10 @@ module.exports = function maxPathSum(root) {
     if (pointer === null) {
       return 0;
     }
-    const left = calculate(pointer.left);
-    const right = calculate(pointer.right);
-
-    const val = pointer.val;
-    const sum = Math.max(val + left, val + right, val);
-    max = Math.max(max, sum, val + left + right);
-    return sum;
+    const left = Math.max(0, calculate(pointer.left));
+    const right = Math.max(0, calculate(pointer.right));
+    max = Math.max(max, pointer.val + left + right);
+    return Math.max(left, right) + pointer.val;
   }
 
   calculate(root);
