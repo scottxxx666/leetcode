@@ -1,21 +1,17 @@
 const oddEvenList = function (head) {
-  let pointer = head ? head.next : null;
-  let prev = head;
-  let evenTail = head;
-  for (let index = 1; pointer !== null; index++) {
-    if (index % 2 === 0) {
-      const temp = evenTail.next;
-      evenTail.next = pointer;
-      evenTail = evenTail.next;
-      const next = pointer.next;
-      pointer.next = temp;
-      prev.next = next;
-      pointer = next;
-    } else {
-      prev = pointer;
-      pointer = pointer.next;
-    }
+  if (head === null) {
+    return null;
   }
+  let even = head;
+  let odd = head.next;
+  let oddHead = odd;
+  while (odd && odd.next) {
+    even.next = odd.next;
+    even = even.next;
+    odd.next = even.next;
+    odd = odd.next;
+  }
+  even.next = oddHead;
   return head;
 };
 
