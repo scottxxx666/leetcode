@@ -1,20 +1,21 @@
 const oddEvenList = function (head) {
-  const oddHead = new ListNode();
-  let odd = oddHead;
-  let even = new ListNode();
-  let pointer = head;
-  for (let index = 0; pointer !== null; index++) {
+  let pointer = head ? head.next : null;
+  let prev = head;
+  let evenTail = head;
+  for (let index = 1; pointer !== null; index++) {
     if (index % 2 === 0) {
-      even.next = pointer;
-      even = even.next;
+      const temp = evenTail.next;
+      evenTail.next = pointer;
+      evenTail = evenTail.next;
+      const next = pointer.next;
+      pointer.next = temp;
+      prev.next = next;
+      pointer = next;
     } else {
-      odd.next = pointer;
-      odd = odd.next;
+      prev = pointer;
+      pointer = pointer.next;
     }
-    pointer = pointer.next;
   }
-  odd.next = null;
-  even.next = oddHead.next;
   return head;
 };
 
