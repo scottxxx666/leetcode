@@ -1,21 +1,17 @@
 const StockSpanner = function () {
   this.prices = [];
-  this.start = 0;
+  this.spans = [];
 };
 
 StockSpanner.prototype.next = function (price) {
+  let result = 1;
+  while (this.prices.length > 0 && price >= this.prices[this.prices.length - 1]) {
+    this.prices.pop();
+    result += this.spans.pop();
+  }
   this.prices.push(price);
-  const length = this.prices.length;
-  if (length >= 2 && this.prices[length - 2] > this.prices[length - 1]) {
-    this.start = length - 1;
-  }
-  while (this.start >= 0 && this.prices[this.start] > price) {
-    this.start++;
-  }
-  while (this.start >= 0 && this.prices[this.start] <= price) {
-    this.start--;
-  }
-  return this.prices.length - this.start - 1;
+  this.spans.push(result);
+  return result;
 };
 
 module.exports = StockSpanner;
