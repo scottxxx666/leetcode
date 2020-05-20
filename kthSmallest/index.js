@@ -1,23 +1,19 @@
-function childrenNum(root, k, result) {
-  if (root === null || result.found) {
-    return 0;
-  }
-  let count = 0;
-  count += childrenNum(root.left, k, result);
-  if (result.found) {
-    return 0;
-  }
-  if (count + 1 === k) {
-    result.found = true;
-    result.val = root.val;
-    return 0;
-  }
-  count += childrenNum(root.right, k - count - 1, result);
-  return count + 1;
-}
-
 module.exports = (root, k) => {
-  const result = { found: false, val: null };
-  childrenNum(root, k, result);
-  return result.val;
+  let weight = 0;
+  let result;
+
+  function find(r) {
+    if (!r) {
+      return 0;
+    }
+    find(r.left);
+    weight += 1;
+    if (!result && weight === k) {
+      result = r.val;
+    }
+    return weight + find(r.right);
+  }
+
+  find(root);
+  return result;
 };
