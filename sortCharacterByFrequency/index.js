@@ -5,8 +5,21 @@ module.exports = (s) => {
     map.set(each, count + 1);
   }
 
-  const chars = [...map.entries()];
-  return chars
-    .sort((a, b) => b[1] - a[1])
-    .reduce((p, c) => p + c[0].repeat(c[1]), '');
+  const counts = new Array(s.length + 1);
+  for (let [k, v] of map.entries()) {
+    if (counts[v]) {
+      counts[v] = [...counts[v], k];
+    } else {
+      counts[v] = [k];
+    }
+  }
+
+  let result = '';
+  for (let i = counts.length - 1; i >= 0; i--) {
+    if (!counts[i]) {
+      continue;
+    }
+    result += counts[i].reduce((p, c) => p + c.repeat(i), '');
+  }
+  return result;
 };
