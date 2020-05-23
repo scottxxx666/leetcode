@@ -7,8 +7,7 @@ module.exports = (A, B) => {
     const [s2, e2] = B[j];
     if (s1 >= s2 && s1 <= e2) {
       result.push([s1, Math.min(e1, e2)]);
-    }
-    if (s2 >= s1 && s2 <= e1) {
+    } else if (s2 >= s1 && s2 <= e1) {
       result.push([s2, Math.min(e1, e2)]);
     }
     if (e1 >= e2) {
