@@ -50,7 +50,7 @@ test('1 3 with 1 line', function () {
   shouldBe(1);
 });
 
-test('1 3 with 1 line', function () {
+test('difficult', function () {
   given([1, 3, 7, 1, 7, 5], [1, 9, 2, 5, 1]);
   shouldBe(2);
 });
