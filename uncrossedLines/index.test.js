@@ -45,3 +45,13 @@ test('3 3 only 1 line due to cross', function () {
   shouldBe(2);
 });
 
+test('1 3 with 1 line', function () {
+  given([3], [3, 3, 2]);
+  shouldBe(1);
+});
+
+test('1 3 with 1 line', function () {
+  given([1, 3, 7, 1, 7, 5], [1, 9, 2, 5, 1]);
+  shouldBe(2);
+});
+
