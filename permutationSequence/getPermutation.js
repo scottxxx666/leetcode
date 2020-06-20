@@ -18,3 +18,28 @@ module.exports = function (n, k) {
   return solution.join('');
 };
 
+const getPermutation = function (n, k) {
+  const set = Array(n).fill(0).map((value, key) => key + 1);
+  let result = '';
+
+  function append(n, k) {
+    if (n === 1) {
+      return result += set[0];
+    }
+    const key = Math.ceil(k / factorial(n - 1)) - 1;
+    result += set[key].toString();
+    set.splice(key, 1);
+    append(n - 1, k - key * factorial(n - 1));
+  }
+
+  append(n, k);
+  return result;
+};
+
+function factorial(n) {
+  let result = 1;
+  for (let i = 2; i <= n; i++) {
+    result *= i;
+  }
+  return result;
+}
