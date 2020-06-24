@@ -21,12 +21,11 @@ const openLock = function (deadends, target) {
         return moves;
       }
       for (let j = 0; j < 4; j++) {
-        const t = temp.split('');
-        t[j] = (t[j] - '0' + 1) % 10;
-        enqueue(t, history, queue);
-
-        t[j] = (t[j] - '0' + 8) % 10;
-        enqueue(t, history, queue);
+        for (let k = -1; k <= 1; k += 2) {
+          const t = temp.split('');
+          t[j] = (t[j] - '0' + 10 + k) % 10;
+          enqueue(t, history, queue);
+        }
       }
     }
     moves++;
