@@ -1,31 +1,33 @@
 module.exports = function (nums) {
-  const input = nums.sort((a, b) => a - b);
-  let result = [];
-  for (let i = 0; i < input.length - 2; i++) {
-    let low = i + 1;
-    let high = input.length - 1;
-    while (low < high) {
-      const lowInput = input[low];
-      const highInput = input[high];
-      const sum = input[i] + lowInput + highInput;
-      if (sum === 0) {
-        result.push([input[i], lowInput, highInput]);
-        while (low < high && input[high] === highInput) {
-          high--;
-        }
-        if (low < high && input[low] === lowInput) {
-          low++;
-        }
-      } else if (sum > 0) {
-        high--;
-      } else {
-        low++;
-      }
-    }
-    while (i < input.length - 3 && input[i] === input[i + 1]) {
+  nums.sort((a, b) => a - b);
+
+  const solution = [];
+  for (let i = 0; i < nums.length - 2; i++) {
+    while (i > 0 && nums[i] === nums[i - 1]) {
       i++;
     }
+    const target = 0 - nums[i];
+    let l = i + 1;
+    let r = nums.length - 1;
+    while (l < r) {
+      const sum = nums[l] + nums[r];
+      if (sum === target) {
+        solution.push([nums[i], nums[l], nums[r]]);
+        r--;
+        l++;
+        while (nums[r] === nums[r + 1]) {
+          r--;
+        }
+        while (nums[l] === nums[l - 1]) {
+          l++;
+        }
+      } else if (sum > target) {
+        r--;
+      } else {
+        l++;
+      }
+    }
   }
-  return result;
+  return solution;
 };
 
