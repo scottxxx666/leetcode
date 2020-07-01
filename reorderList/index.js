@@ -2,41 +2,31 @@ const reorderList = function (head) {
   if (!head || !head.next) {
     return;
   }
-  let n = 0;
-  let pointer = head;
-  while (pointer.next) {
-    n++;
-    pointer = pointer.next;
+
+  let slow = head;
+  let fast = head;
+  while (fast.next && fast.next.next) {
+    slow = slow.next;
+    fast = fast.next.next;
   }
-  pointer = head;
-  for (let i = 0; i <= Math.floor(n / 2) - 1; i++) {
-    pointer = pointer.next;
-  }
-  const t = pointer.next;
-  pointer.next = null;
-  pointer = t;
+
+  let pointer = slow.next;
+  slow.next = null;
 
   let prev = null;
-  let curr = pointer;
-  let next = pointer.next;
-  while (curr && next) {
-    const temp = next.next;
-    next.next = curr;
-    curr.next = prev;
-
-    prev = curr;
-    curr = next;
-    next = temp;
+  while (pointer) {
+    const temp = pointer.next;
+    pointer.next = prev;
+    prev = pointer;
+    pointer = temp;
   }
 
-  let afterHead = curr;
+  let afterHead = prev;
   while (afterHead) {
     const temp = head.next;
     head.next = afterHead;
     afterHead = afterHead.next;
-    if (head.next) {
-      head.next.next = temp;
-    }
+    head.next.next = temp;
     head = temp;
   }
 };
