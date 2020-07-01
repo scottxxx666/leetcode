@@ -1,19 +1,25 @@
 const circularArrayLoop = function (nums) {
   function next(i) {
     const n = nums[i];
-    const nextIndex = (i + n % nums.length + nums.length) % nums.length;
-    if (n * nums[nextIndex] <= 0) {
+    const nextI = nextIndex(i)
+    if (n * nums[nextI] <= 0) {
       return -1;
     }
-    if (i === nextIndex) {
+    if (i === nextI) {
       return -1;
     }
-    return nextIndex;
+    return nextI;
   }
 
   for (let i = 0; i < nums.length; i++) {
     if (isCycle(i)) {
       return true;
+    }
+
+    while (nums[i]*nums[nextIndex(i)] > 0) {
+      const nextI = nextIndex(i);
+      nums[i]=0;
+      i = nextI;
     }
   }
   return false;
@@ -29,5 +35,9 @@ const circularArrayLoop = function (nums) {
       }
     } while (slow !== fast && slow !== -1 && fast !== -1);
     return fast !== -1 && slow !== -1;
+  }
+
+  function nextIndex(i) {
+    return (i + nums[i] % nums.length + nums.length) % nums.length;
   }
 };
